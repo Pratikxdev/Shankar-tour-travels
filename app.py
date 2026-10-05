@@ -11,9 +11,9 @@ load_dotenv()   # isi folder me ".env" file hai to usse saari settings yahan loa
 
 # ---------- Settings (.env file se, ya seedha environment variable se) ----------
 DSN = os.environ.get("DATABASE_URL") or (
-    f"host={os.environ.get('DB_HOST','xxxxx')} port={os.environ.get('DB_PORT','xxxxx')} "
-    f"dbname={os.environ.get('DB_NAME','xxxxx')} user={os.environ.get('DB_USER','xxxxx')} "
-    f"password={os.environ.get('DB_PASSWORD','xxxxx')}")
+    f"host={os.environ.get('DB_HOST')} port={os.environ.get('DB_PORT')} "
+    f"dbname={os.environ.get('DB_NAME')} user={os.environ.get('DB_USER')} "
+    f"password={os.environ.get('DB_PASSWORD')}")
 DEBUG = os.environ.get("DEBUG", "1") == "1"      # hosting ke liye default ab OFF hai; local test karte waqt DEBUG=1 set kar sakte ho
 LAYOUTS = {"sedan": ["F1","M1","M2","M3"], "dzire": ["F1","M1","M2","M3"]}
 ORIGINS = ["Ballia", "Varanasi", "Lucknow"]
