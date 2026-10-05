@@ -14,7 +14,7 @@ DSN = os.environ.get("DATABASE_URL") or (
     f"host={os.environ.get('DB_HOST')} port={os.environ.get('DB_PORT')} "
     f"dbname={os.environ.get('DB_NAME')} user={os.environ.get('DB_USER')} "
     f"password={os.environ.get('DB_PASSWORD')}")
-DEBUG = os.environ.get("DEBUG", "1") == "1"      # hosting ke liye default ab OFF hai; local test karte waqt DEBUG=1 set kar sakte ho
+DEBUG = os.environ.get("DEBUG", "0") == "1"      # hosting ke liye default ab OFF hai; local test karte waqt DEBUG=1 set kar sakte ho
 LAYOUTS = {"sedan": ["F1","M1","M2","M3"], "dzire": ["F1","M1","M2","M3"]}
 ORIGINS = ["Ballia", "Varanasi", "Lucknow"]
 PRICE_KEY = {"F": "front_seat", "M": "middle_seat", "B": "back_seat"}
