@@ -12,7 +12,7 @@ Stack: HTML + CSS + JS (frontend), **Python Flask** (API + admin), PostgreSQL.
    python -m venv venv
    venv\Scripts\activate
    pip install -r requirements.txt
-   python create_admin.py Shankartravels APNA_PASSWORD
+   python create_admin.py ADMIN_USERNAME APNA_PASSWORD
    python app.py
    ```
 5. Site: http://localhost:8000   Admin: http://localhost:8000/admin/login
