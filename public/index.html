@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHANKAR TOUR & TRAVELS | Cab Booking – Ballia, Varanasi, Lucknow</title>
+<meta name="description" content="Sharing cab with seat selection, full car, monthly rental, wedding cars and airport transfer from Ballia, Varanasi and Lucknow.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="top"><div class="wrap nav">
+  <a href="#home" class="logo"><svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><rect width="48" height="48" rx="10" fill="#f4b000"/><path d="M6 36 Q24 20 42 36" stroke="#0b2a5b" stroke-width="3" fill="none" stroke-dasharray="4 3"/><path d="M11 30h26l-3-8H15z M9 30v5h30v-5" fill="#0b2a5b"/><circle cx="16" cy="36" r="3" fill="#fff"/><circle cx="32" cy="36" r="3" fill="#fff"/></svg>
+  <span><b>SHANKAR</b><small>TOUR & TRAVELS</small></span></a>
+  <nav id="menu"><a href="#home">Home</a><a href="#book">Sharing Cab</a><a href="#services">Services</a><a href="#enquiry">Full Car / Rental</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+  <div class="cta"><a class="btn sm" href="tel:+917678891418">Call Now</a><a class="btn sm wa" href="https://wa.me/917678891418?text=Hello%20Shankar%20Tour%20%26%20Travels%2C%20mujhe%20cab%20book%20karni%20hai." target="_blank" rel="noopener">WhatsApp</a><a class="btn sm gold" href="#book">Book Now</a>
+  <button id="burger" aria-label="Menu" aria-expanded="false">☰</button></div></div></header>
+
+<section id="home" class="hero"><div class="wrap heroin">
+  <div><h1>Your Journey, Our Responsibility</h1><p class="lead">Reliable Rides. Comfortable Journeys. Ballia, Varanasi aur Lucknow se seat ya poori car book karo.</p>
+    <div class="row"><a class="btn gold lg" href="#book">Book Your Ride</a><a class="btn ghost lg" href="tel:+917678891418">Call Now</a></div>
+    <ul class="ticks"><li>Seat khud chuno</li><li>₹50 off pehli booking pe</li><li>Call ya WhatsApp pe bhi booking</li></ul></div>
+  <form class="card panel" id="heroForm"><h3>Find your cab</h3>
+    <label>From<select id="hOrigin"></select></label><label>To<select id="hDest"></select></label>
+    <label>Journey date<input type="date" id="hDate" required></label>
+    <button class="btn gold">Search Available Cars</button></form></div></section>
+
+<section id="book" class="sec"><div class="wrap"><h2>Sharing Cab Booking</h2>
+  <p class="muted">Route chuno, car chuno, phir seat. <span class="dot g"></span>Vacant <span class="dot y"></span>Selected <span class="dot r"></span>Booked <span class="dot x"></span>Not available</p>
+  <div class="bookgrid">
+  <div class="card"><div class="grid2">
+    <label>From<select id="origin"></select></label><label>To<select id="dest"></select></label>
+    <label>Date<input type="date" id="date"></label><label class="muted" style="justify-content:flex-end;padding-bottom:10px">⏱ Pickup time call/WhatsApp par confirm hoga</label></div>
+    <h4>Select car</h4><div id="cars" class="cars"></div>
+    <h4>Select seat <small id="seatNote" class="muted"></small></h4><div id="seatmap" class="seatmap"></div></div>
+  <aside class="card" id="side"><h4>Booking summary</h4><div id="summary" class="muted">Pehle car aur seat chuno.</div>
+    <form id="pform" hidden><label>Full name<input id="pname" required autocomplete="name"></label>
+    <label>Mobile<input id="pmobile" inputmode="numeric" pattern="[0-9 +]{10,14}" required autocomplete="tel"></label>
+    <label>Email (optional)<input id="pemail" type="email"></label>
+    <label class="chk"><input type="checkbox" id="pfollow"> Maine <a href="https://www.instagram.com/shankar_tour_travels?stkn=azBjc2FrdzY5MGZx&utm_source=qr" target="_blank" rel="noopener">Instagram</a> aur <a href="https://www.facebook.com/share/1F3Eqvzc2B/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a> page follow kiya hai (₹<span id="disc">50</span> off, sirf pehli booking)</label>
+    <button class="btn gold">Confirm Booking</button></form></aside></div>
+  <div id="ticket" class="ticket" hidden></div></div></section>
+
+<section id="services" class="sec alt"><div class="wrap"><h2>Our Services</h2><div class="cards" id="svc"></div></div></section>
+
+<section id="enquiry" class="sec"><div class="wrap narrow"><h2>Full Car, Rental, Wedding & Airport</h2>
+  <p class="muted">Form bharo, hum call karke price bata denge. One-way drop: minimum 300 KM.</p>
+  <form id="eform" class="card grid2"><label>Service<select id="esvc"><option>Full Car Booking</option><option>Monthly Rental</option><option>Wedding Booking</option><option>Airport Transfer</option><option>One Way Drop</option></select></label>
+  <label>Name<input id="ename" required></label><label>Phone<input id="ephone" inputmode="numeric" required></label>
+  <label>Pickup<input id="epick"></label><label>Drop / Venue<input id="edrop"></label>
+  <label>Date<input type="date" id="edate"></label><label>Time<input type="time" id="etime"></label>
+  <label class="full">Details (cars, passengers, flight no., decoration...)<textarea id="edet" rows="2"></textarea></label>
+  <div class="full row"><button class="btn gold">Send Enquiry</button><button type="button" class="btn wa" id="ewa">Send on WhatsApp</button></div></form></div></section>
+
+<section class="sec alt"><div class="wrap"><h2>Why choose us</h2><div class="cards four">
+  <div class="card"><b>Clean cars</b><p class="muted">Har trip se pehle safai.</p></div><div class="card"><b>Experienced drivers</b><p class="muted">Local raston ke jaankar.</p></div>
+  <div class="card"><b>Fixed seat price</b><p class="muted">Front ₹<span class="pf"></span>, baaki seat ₹<span class="pm"></span>.</p></div><div class="card"><b>24/7 support</b><p class="muted">Call ya WhatsApp kabhi bhi.</p></div></div></div></section>
+
+<section id="faq" class="sec"><div class="wrap narrow"><h2>FAQ</h2>
+<details><summary>Sharing cab kaise book karu?</summary><p>Upar route, date aur car chuno, phir seat select karke naam-mobile daalo aur Confirm Booking dabao.</p></details>
+<details><summary>Kya seat khud chun sakte hain?</summary><p>Haan. Green seat khaali hai, red booked hai, yellow aapki chuni hui seat.</p></details>
+<details><summary>Seat ka price kitna hai?</summary><p>Front seat ₹<span class="pf"></span>, middle/back seat ₹<span class="pm"></span>.</p></details>
+<details><summary>Poori car, shaadi ya airport ke liye?</summary><p>Full Car / Rental form bharo ya seedha call/WhatsApp karo: +91 76788 91418.</p></details>
+<details><summary>₹50 discount kaise milega?</summary><p>Hamara Instagram aur Facebook page follow karo, booking me checkbox tick karo. Sirf pehli booking pe, aur travel ke time page follow check kiya ja sakta hai.</p></details>
+<details><summary>Booking cancel ho sakti hai?</summary><p>Cancel karne ke liye call ya WhatsApp karo, hum booking cancel kar denge.</p></details></div></section>
+
+<section id="contact" class="sec alt"><div class="wrap"><h2>Contact</h2><div class="row">
+<a class="btn lg" href="tel:+917678891418">Call +91 76788 91418</a><a class="btn wa lg" href="https://wa.me/917678891418" target="_blank" rel="noopener">WhatsApp</a>
+<a class="btn ghost dark lg" href="https://www.instagram.com/shankar_tour_travels?stkn=azBjc2FrdzY5MGZx&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
+<a class="btn ghost dark lg" href="https://www.facebook.com/share/1F3Eqvzc2B/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></div></div></section>
+
+<section id="reviews" class="sec alt"><div class="wrap narrow">
+  <h2>Customer Reviews</h2>
+  <div id="revList" class="revlist"><p class="muted">Loading reviews…</p></div>
+  <div class="card" style="margin-top:22px"><h4>Apna review likho</h4>
+    <form id="rform" class="grid2">
+      <label>Aapka naam<input id="rname" required maxlength="60"></label>
+      <label>Rating
+        <div class="stars" id="rstars" role="radiogroup" aria-label="Rating">
+          <button type="button" data-v="1">★</button><button type="button" data-v="2">★</button><button type="button" data-v="3">★</button><button type="button" data-v="4">★</button><button type="button" data-v="5">★</button>
+        </div>
+      </label>
+      <label class="full">Aapka anubhav (experience)<textarea id="rcomment" rows="2" required maxlength="500"></textarea></label>
+      <div class="full"><button class="btn gold">Submit Review</button> </div>
+    </form>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><b>SHANKAR TOUR & TRAVELS</b> · Ballia · Varanasi · Lucknow<br>© 2026 Shankar Tour & Travels. All Rights Reserved. · <a href="/admin/login">Admin</a></div></footer>
+<div class="mbar"><a href="tel:+917678891418">Call</a><a class="gold" href="#book">Book Now</a><a href="https://wa.me/917678891418" target="_blank" rel="noopener">WhatsApp</a></div>
+<div id="modal" class="modal" hidden><div class="card mbox" id="mbox"></div></div><div id="toast" class="toast" hidden></div>
+<script src="assets/app.js"></script></body></html>

@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard | Shankar Tour & Travels</title><link rel="stylesheet" href="/assets/style.css"></head><body class="adminpage">
+<header class="ahead"><b>Shankar Tour & Travels · Admin</b><span>{{ user }} · <a href="/admin/logout">Logout</a></span></header>
+<main class="wrap">
+<div class="stats">{% for k, v in stats %}<div class="card stat"><b>{{ v }}</b><span>{{ k }}</span></div>{% endfor %}</div>
+
+<h2>Bookings</h2><div class="scroll"><table><tr><th>ID</th><th>Customer</th><th>Car / Seat</th><th>Route</th><th>Date</th><th>Amount</th><th>Status</th></tr>
+{% for b in bookings %}<tr><td>{{ b.code }}</td><td>{{ b.name }}<br><a href="tel:{{ b.mobile }}">{{ b.mobile }}</a></td>
+<td>{{ b.car }} / {{ b.seat }}</td><td>{{ b.origin }} → {{ b.destination }}</td><td>{{ b.travel_date }} {{ b.travel_time }}</td>
+<td>₹{{ b.amount }}{% if b.discount %}<br><small>(₹{{ b.discount }} off)</small>{% endif %}</td>
+<td><form method="post" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="status"><input type="hidden" name="id" value="{{ b.id }}">
+<select name="status" onchange="this.form.submit()">{% for st in ['Pending','Confirmed','Cancelled'] %}<option {{ 'selected' if st == b.status }}>{{ st }}</option>{% endfor %}</select></form></td></tr>
+{% else %}<tr><td colspan="7">Abhi koi booking nahi.</td></tr>{% endfor %}</table></div>
+
+<h2>Pricing (₹)</h2><form method="post" class="card grid"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="prices">
+{% for k, l in [('front_seat','Front seat'),('middle_seat','Middle seat'),('back_seat','Back seat'),('per_day','Monthly / per day (+ fuel)'),('follow_discount','First-booking follow discount')] %}
+<label>{{ l }}<input type="number" min="0" name="{{ k }}" value="{{ s[k] }}"></label>{% endfor %}<button class="btn gold">Save prices</button></form>
+
+<h2>Route Pricing (overrides)</h2>
+<p class="muted">Jo route yahan list nahi hai, woh upar wali global "Pricing" use karta hai. Naya route ka rate yahan se set karo.</p>
+<div class="scroll"><table><tr><th>From</th><th>To</th><th>Front</th><th>Middle</th><th>Back</th><th>Action</th></tr>
+{% for r in route_prices %}<tr><td>{{ r.origin }}</td><td>{{ r.destination }}</td><td>₹{{ r.front_seat }}</td><td>₹{{ r.middle_seat }}</td><td>₹{{ r.back_seat }}</td>
+<td><form method="post" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="route_price_delete">
+<input type="hidden" name="origin" value="{{ r.origin }}"><input type="hidden" name="destination" value="{{ r.destination }}">
+<button class="btn sm">Default pe wapas bhejo</button></form></td></tr>
+{% else %}<tr><td colspan="6">Koi route-specific rate set nahi hai, sab default rate use kar rahe hain.</td></tr>{% endfor %}</table></div>
+<form method="post" class="card grid" style="margin-top:10px"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="route_price">
+<label>From<select name="origin">{% for o in origins %}<option>{{ o }}</option>{% endfor %}</select></label>
+<label>To (jaisa website pe dikhta hai, waisa hi likho)<input name="destination" required placeholder="e.g. Gorakhpur"></label>
+<label>Front seat ₹<input type="number" min="0" name="front_seat" required></label>
+<label>Middle seat ₹<input type="number" min="0" name="middle_seat" required></label>
+<label>Back seat ₹<input type="number" min="0" name="back_seat" required></label>
+<button class="btn gold">Save route rate</button></form>
+
+<h2>Cars</h2><div class="scroll"><table><tr><th>Car</th><th>Type</th><th>Number / Driver</th><th>Blocked seats</th><th>Status</th></tr>
+{% for c in cars %}<tr><td>{{ c.name }}</td><td>{{ c.type }}</td><td>{{ c.plate }} / {{ c.driver }}</td>
+<td><form method="post" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="car_blocked"><input type="hidden" name="id" value="{{ c.id }}">
+<input name="blocked" value="{{ c.blocked_seats }}" placeholder="e.g. M3,B3" size="9"><button class="btn sm">Save</button></form></td>
+<td>{% if not c.active and c.type not in types %}<span class="muted">Is type ka ab support nahi hai (permanently disabled)</span>
+{% else %}<form method="post" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="car_toggle"><input type="hidden" name="id" value="{{ c.id }}">
+<button class="btn sm">{{ 'Enabled – click to disable' if c.active else 'Disabled – click to enable' }}</button></form>{% endif %}</td></tr>{% endfor %}</table></div>
+<form method="post" class="card grid"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="car_add">
+<label>Car name<input name="name" required></label><label>Type<select name="type">{% for t in types %}<option>{{ t }}</option>{% endfor %}</select></label>
+<label>Car number<input name="plate"></label><label>Driver<input name="driver"></label><button class="btn gold">Add car</button></form>
+
+<h2>Enquiries (full car, monthly, wedding, airport)</h2><div class="scroll"><table><tr><th>Service</th><th>Name / Phone</th><th>Pickup → Drop</th><th>Date</th><th>Details</th></tr>
+{% for e in enquiries %}<tr><td>{{ e.service }}</td><td>{{ e.name }}<br><a href="tel:{{ e.phone }}">{{ e.phone }}</a></td><td>{{ e.pickup }} → {{ e.drop_or_venue }}</td>
+<td>{{ e.travel_date or '' }} {{ e.travel_time or '' }}</td><td>{{ e.details }}</td></tr>{% else %}<tr><td colspan="5">Abhi koi enquiry nahi.</td></tr>{% endfor %}</table></div>
+
+<h2>Reviews</h2>
+<p class="muted">Naya review pehle yahan "Pending" dikhega — Approve dabane ke baad hi website par public ko dikhega.</p>
+<div class="scroll"><table><tr><th>Name</th><th>Rating</th><th>Comment</th><th>Status</th><th>Action</th></tr>
+{% for r in reviews %}<tr><td>{{ r.name }}</td><td>{{ '★' * r.rating }}</td><td>{{ r.comment }}</td>
+<td>{{ 'Approved · live hai' if r.approved else 'Pending' }}</td>
+<td class="inline">
+{% if not r.approved %}<form method="post" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="review_approve"><input type="hidden" name="id" value="{{ r.id }}"><button class="btn sm gold">Approve</button></form>{% endif %}
+<form method="post" class="inline"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="review_delete"><input type="hidden" name="id" value="{{ r.id }}"><button class="btn sm">Delete</button></form>
+</td></tr>{% else %}<tr><td colspan="5">Abhi koi review nahi.</td></tr>{% endfor %}</table></div>
+</main></body></html>

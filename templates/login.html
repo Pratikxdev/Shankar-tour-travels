@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Login | Shankar Tour & Travels</title><link rel="stylesheet" href="/assets/style.css"></head>
+<body class="adminbg"><form method="post" class="card login">
+<div class="loginlogo"><svg viewBox="0 0 48 48" width="40" height="40" aria-hidden="true"><rect width="48" height="48" rx="10" fill="#f4b000"/><path d="M6 36 Q24 20 42 36" stroke="#0b2a5b" stroke-width="3" fill="none" stroke-dasharray="4 3"/><path d="M11 30h26l-3-8H15z M9 30v5h30v-5" fill="#0b2a5b"/><circle cx="16" cy="36" r="3" fill="#fff"/><circle cx="32" cy="36" r="3" fill="#fff"/></svg>
+<span><b>SHANKAR</b><small>TOUR &amp; TRAVELS</small></span></div>
+<h1>Admin Login</h1><p class="muted">Manage bookings, cars and pricing.</p>
+<label>Username<input name="username" required autofocus autocomplete="username"></label>
+<label>Password
+  <span class="pwrap">
+    <input name="password" type="password" required autocomplete="current-password" id="pw">
+    <button type="button" id="pwtoggle" aria-label="Password dikhao/chhupao">👁</button>
+  </span>
+</label>
+<label class="chk"><input type="checkbox" name="remember" value="1"> Mujhe 30 din tak yaad rakho (is device par)</label>
+{% if msg %}<p class="err">{{ msg }}</p>{% endif %}
+<button class="btn gold">Log In</button><p><a href="/">← Back to website</a></p></form>
+<script>
+document.getElementById('pwtoggle').onclick = () => {
+  const p = document.getElementById('pw');
+  p.type = p.type === 'password' ? 'text' : 'password';
+};
+</script>
+</body></html>
